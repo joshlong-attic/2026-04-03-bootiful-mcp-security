@@ -32,10 +32,11 @@ public class ClientApplication {
 
     @Bean
     Customizer<HttpSecurity> httpSecurityCustomizer() {
-        return http -> http.with(mcpClientOAuth2());
+        return http -> http
+                .with(mcpClientOAuth2());
     }
 
-    @Bean
+  @Bean
     MyMcpClientRegistrationRepository clientRegistrationRepository(
             OAuth2ClientProperties auth2ClientProperties) {
         var mapper = new OAuth2ClientPropertiesMapper(auth2ClientProperties);
@@ -89,6 +90,11 @@ class AssistantController {
     AssistantController(ToolCallbackProvider tcp, ChatClient.Builder ai) {
         this.ai = ai
                 .defaultToolCallbacks(tcp)
+                .defaultSystem("""
+                        helpo people schedule appointments for picking up dogs from the Pooch Palace adoption shelter.
+                        if somebody asks for a date, use the tools to get a valid appointment date and return the response without 
+                        further questioning.
+                        """)
                 .build();
     }
 
