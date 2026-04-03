@@ -33,52 +33,9 @@ public class ClientApplication {
     @Bean
     Customizer<HttpSecurity> httpSecurityCustomizer() {
         return http -> http
-                .with(mcpClientOAuth2());
+                .with(mcpClientOAuth2 ());
     }
 
-  @Bean
-    MyMcpClientRegistrationRepository clientRegistrationRepository(
-            OAuth2ClientProperties auth2ClientProperties) {
-        var mapper = new OAuth2ClientPropertiesMapper(auth2ClientProperties);
-        var i = new InMemoryClientRegistrationRepository(mapper.asClientRegistrations());
-        return new MyMcpClientRegistrationRepository(i);
-    }
-
-
-}
-
-class MyMcpClientRegistrationRepository implements McpClientRegistrationRepository, Iterable<ClientRegistration> {
-
-    private final InMemoryClientRegistrationRepository repository;
-
-    MyMcpClientRegistrationRepository(InMemoryClientRegistrationRepository repository) {
-        this.repository = repository;
-    }
-
-    @Override
-    public Iterator<ClientRegistration> iterator() {
-        return this.repository.iterator();
-    }
-
-    @Override
-    public void addClientRegistration(ClientRegistration clientRegistration, @Nullable String resourceId) {
-        // todo
-    }
-
-    @Override
-    public void updateClientRegistration(String registrationId, Consumer<ClientRegistration.Builder> clientRegistrationConsumer) {
-        // todo
-    }
-
-    @Override
-    public @Nullable String findResourceIdByRegistrationId(String registrationId) {
-        return null;
-    }
-
-    @Override
-    public ClientRegistration findByRegistrationId(String registrationId) {
-        return repository.findByRegistrationId(registrationId);
-    }
 }
 
 @Controller

@@ -41,7 +41,9 @@
 		<dependency>
 			<groupId>org.springaicommunity</groupId>
 			<artifactId>mcp-authorization-server-spring-boot</artifactId>
-			<version>0.1.5</version>
+			<version>
+				0.1.6-SNAPSHOT
+			</version>
 		</dependency>
 
 		<dependency>
@@ -74,4 +76,14 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>snapshots</id>
+			<name>Snapshots</name>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
 </project>
