@@ -27,7 +27,7 @@ public class AuthzApplication {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) {
         return http
-                .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .with(mcpAuthorizationServer(), mcp -> mcp.authorizationServer(springAuthServer -> springAuthServer.oidc(Customizer.withDefaults())))
                 .formLogin(Customizer.withDefaults())
                 .build();
